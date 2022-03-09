@@ -19,7 +19,7 @@ variable "affix_formats" {
 }
 
 variable "output_tags" {
-  default = ["az","prj","env","zone","tier"]
+  default = []
 }
 
 variable "formatted_tags" {
@@ -87,7 +87,7 @@ locals {
   }
 
   tags = {for tag in local.output_tags :
-    tag => lookup(local.context, tag, null) != null ? local.context[tag] : "hi"
+    tag => lookup(local.context, tag, null)
   }
   formatted_tags = {for tag, key in var.formatted_tags :
     tag => lookup(local.affixes, key, null)
